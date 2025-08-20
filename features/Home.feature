@@ -1,18 +1,18 @@
-Feature: End-to-End JustDial User Journey
-
-  Scenario Outline: Car Wash to Gym navigation on "<browser>"
-    Given User launches browser "<browser>" and opens JustDial website
-    When User handles car wash popups
-    And User searches for car washing services
-    And User applies rating filter
-    And User prints top rated services
-    Then User submits Free Listing with mobile number 1234567890 and retries with valid number
-    And User returns to homepage
-    And User navigates to Gym menu
-    Then User prints gym submenu items
-    And User closes browser
+Feature: Validate search functionality on Justdial homepage
+ 
+  Scenario Outline: Search with different inputs and verify system response
+    Given the user launches a browser
+    And navigates to the Justdial homepage
+    When the user clicks "Maybe Later" if a popup appears
+    And handles any additional permission or alert popups
+    And the user enters "<searchInput>" in the search box
+    And clicks the "Search" button
+    Then the user should see "<expectedMessage>"
 
     Examples:
-      | browser |
-      | edge    |
-      | chrome  |
+      | searchInput           | expectedMessage                                  |
+      |                       | Please enter category / company name for search. |
+      | @#$%^&*               | Please enter category / company name for search. |
+      | Car Washing Services  | Listings for Car Washing Services shown          |
+
+ 
